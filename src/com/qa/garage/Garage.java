@@ -1,12 +1,16 @@
 package com.qa.garage;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.qa.garage.vehicle.MotorBike;
+import com.qa.garage.vehicle.Submarine;
+import com.qa.garage.vehicle.Tank;
 import com.qa.garage.vehicle.Vehicle;
 
 public class Garage {
 
-	private ArrayList<Vehicle> vehicles = new ArrayList<>();
+	private List<Vehicle> vehicles = new ArrayList<>();
 
 	public boolean addVehicle(Vehicle vehicle) {
 		return this.vehicles.add(vehicle);
@@ -50,6 +54,26 @@ public class Garage {
 
 		for (Vehicle v : this.vehicles) {
 			bill += v.calcBill();
+		}
+
+		return bill;
+	}
+
+	public float fixLong() {
+		float bill = 0.0F;
+
+		for (Vehicle v : this.vehicles) {
+			if (v instanceof Tank) {
+				bill += v.getEngineSize() * v.getNoOfWheels();
+
+				bill += ((Tank) v).getBarrelSize() * 100;
+			} else if (v instanceof Submarine) {
+				bill += v.getEngineSize() * v.getNoOfWheels();
+
+				bill += ((Submarine) v).getTorpedoes() * 50;
+			} else if (v instanceof MotorBike) {
+
+			}
 		}
 
 		return bill;
